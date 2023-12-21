@@ -1,0 +1,16 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Commands\\": "Commands/",
+            "Database\\": "Database/",
+            "Design\\": "Design/",
+            "Exceptions\\": "Exceptions/",
+            "Helpers\\": "Helpers/",
+            "Public\\": "Public/",
+            "Response\\": "Response/",
+            "Routing\\": "Routing/",
+            "Temp\\": "Temp/",
+            "Views\\": "Views/"
+        }
+    }
+}
