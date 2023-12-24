@@ -72,21 +72,15 @@ class DatabaseHelper
         $i = 0;
 
         while ($row = $result->fetch_assoc()) {
-            $ImagesList[$i] = [
-                "title" => $row["title"],
-                "post_url" => $row["post_url"],
-                "image_path" => $row["image_path"],
-                "view_count" => $row["view_count"]
-            ];
+            $ImagesList[$i] = $row;
             $i++;
         }
 
         if (!$ImagesList){
+            // header("Location: ../notFoundImage");
+            // exit;
             $ImagesList[0] = [
-                "title" => "",
-                "post_url" => "",
-                "image_path" => "",
-                "view_count" => 0
+                "id" => 0,
             ];
         }
         return $ImagesList;

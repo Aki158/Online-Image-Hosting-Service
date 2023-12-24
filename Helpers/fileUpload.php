@@ -91,14 +91,14 @@ $response_data = array(
 );
 
 // app_newImage.jsにJSON形式でデータをレスポンスする
-echo json_encode($response_data);
+print(json_encode($response_data));
 
 function generateDir(){
-    $dir_path = '../Images';
-    $date_arr = array(date('Y'), date('m'), date('d'));
+    $dir_path = '..';
+    $dir_arr = ['Images', date('Y'), date('m'), date('d')];
 
-    foreach($date_arr as $date){
-        $dir_path .= '/' . $date;
+    foreach($dir_arr as $dir_name){
+        $dir_path .= '/' . $dir_name;
         if(!file_exists($dir_path)){
             mkdir($dir_path, 0777);
             chmod($dir_path, 0777);
