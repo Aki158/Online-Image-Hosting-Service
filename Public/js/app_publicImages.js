@@ -4,41 +4,30 @@ window.addEventListener("load", (event) => {
     }
 });
 
-function renderTableCell(index,ImagesList,imagesListBody){
+function renderTableCell(index, ImagesList, imagesListBody){
     const div = document.createElement("div");
+    const a = document.createElement("a");
     const img = document.createElement("img");
     const title = document.createElement("p");
     const view_count = document.createElement("p");
 
-    div.classList.add("col-3","my-2");
-    img.src = "../Images" + ImagesList[index].file_extension + 
+    div.setAttribute("id", "ImageList"+(index+1));
+    a.setAttribute("id", "a"+(index+1));
+    img.setAttribute("id", "img"+(index+1));
+    title.setAttribute("id", "title"+(index+1));
+    view_count.setAttribute("id", "view_count"+(index+1));
 
-
-    // const row = document.createElement("tr");
-    // const cellThName = document.createElement("th");
-    // const cellTdPosted = document.createElement("td");
-    // const cellTdSyntax = document.createElement("td");
-
-    // row.setAttribute("id", "table_content"+(index+1));
-
-    // cellThName.setAttribute("id", "name"+(index+1));
-    // cellTdPosted.setAttribute("id", "posted"+(index+1));
-    // cellTdSyntax.setAttribute("id", "syntax"+(index+1));
-
-    // cellThName.innerHTML = ImagesList[index].name;
-    // cellTdPosted.innerHTML = ImagesList[index].posted;
-    // cellTdSyntax.innerHTML = ImagesList[index].syntax;
-
-    // row.classList.add("cursor-pointer");
+    div.classList.add("col-3", "my-2");
+    img.classList.add("public-img-size");
     
-    // row.addEventListener("click", function() {
-    //     if(ImagesList[index].path !== "None"){
-    //         window.location.href = "image/"+ImagesList[index].path;
-    //     }
-    // });
+    a.href = ImagesList[index].post_url;
+    img.src = ImagesList[index].image_path;
+    title.innerHTML = "<i class='fa-solid fa-file-signature'></i> " + ImagesList[index].title;
+    view_count.innerHTML = "<i class='fa-solid fa-fire'></i> 閲覧数 : " + ImagesList[index].view_count;
 
-    // row.append(cellThName);
-    // row.append(cellTdPosted);
-    // row.append(cellTdSyntax);
-    imagesListBody.append(row);
+    a.append(img);
+    div.append(a);
+    div.append(title);
+    div.append(view_count);
+    imagesListBody.append(div);
 }
