@@ -13,7 +13,8 @@ $routes = include('Routing/routes.php');
 // リクエストURIを解析してパスだけを取得します。
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = ltrim($path, '/');
-$path = ValidationHelper::path($path,'image');
+$allowed_path = ['image/jpeg', 'image/png', 'image/gif'];
+$path = ValidationHelper::path($path, $allowed_path);
 
 // ルーティングにパスが存在するかチェックする
 if (isset($routes[$path])) {

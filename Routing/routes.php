@@ -12,34 +12,60 @@ return [
 
         return new HTMLRenderer('newImage', ['ImageStatus'=>$ImageStatus]);
     },
-    'newImage'=>function(): HTTPRenderer{
-        $ImageStatus = ValidationHelper::string($_GET['ImageStatus']??'');
-
-        return new HTMLRenderer('newImage', ['ImageStatus'=>$ImageStatus]);
-    },
     'publicImages'=>function(): HTTPRenderer{
         $ImagesList = DatabaseHelper::getImagesListInfo();
 
         return new HTMLRenderer('publicImages', ['ImagesList'=>$ImagesList]);
     },
-    'postImage'=>function(): HTTPRenderer{
+    'image/jpeg'=>function(): HTTPRenderer{
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $path = ltrim($path, '/image/');
+        $path = ltrim($path, '/');
         $path = ValidationHelper::string($path);
-        $postimage = DatabaseHelper::getImage($path);
-
-        return new HTMLRenderer('postImage', ['postImage'=>$postimage]);
+        $url_type = ValidationHelper::urlType($path);
+        $image = DatabaseHelper::getImage($url_type, $path);
+        
+        if($url_type === "post_url"){
+            DatabaseHelper::updateImage($image["id"]);
+            return new HTMLRenderer('postImage', ['image'=>$image]);
+        }
+        return new HTMLRenderer('deleteImage', ['image'=>$image]);
     },
-    'deleteImage'=>function(): HTTPRenderer{
+    'image/png'=>function(): HTTPRenderer{
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $path = ltrim($path, '/image/');
+        $path = ltrim($path, '/');
         $path = ValidationHelper::string($path);
-        $deleteImage = DatabaseHelper::getImage($path);
-
-        return new HTMLRenderer('deleteImage', ['deleteImage'=>$deleteImage]);
+        $url_type = ValidationHelper::urlType($path);
+        $image = DatabaseHelper::getImage($url_type, $path);
+        
+        if($url_type === "post_url"){
+            DatabaseHelper::updateImage($image["id"]);
+            return new HTMLRenderer('postImage', ['image'=>$image]);
+        }
+        return new HTMLRenderer('deleteImage', ['image'=>$image]);
     },
-    'notExistImage'=>function(): HTTPRenderer{
-        return new HTMLRenderer('notExistImage', ['notExistImage'=>'Not Exist Image']);
+    'image/gif'=>function(): HTTPRenderer{
+        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $path = ltrim($path, '/');
+        $path = ValidationHelper::string($path);
+        $url_type = ValidationHelper::urlType($path);
+        $image = DatabaseHelper::getImage($url_type, $path);
+        
+        if($url_type === "post_url"){
+            DatabaseHelper::updateImage($image["id"]);
+            return new HTMLRenderer('postImage', ['image'=>$image]);
+        }
+        return new HTMLRenderer('deleteImage', ['image'=>$image]);
+    },
+    // 'deleteImage'=>function(): HTTPRenderer{
+    //     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    //     $path = ltrim($path, '/');
+    //     $path = ValidationHelper::string($path);
+    //     $deleteImage = DatabaseHelper::getImage('delete_url', $path);
+
+    //     return new HTMLRenderer('deleteImage', ['deleteImage'=>$deleteImage]);
+    // },
+    'notFoundImage'=>function(): HTTPRenderer{
+        return new HTMLRenderer('notFoundImage', ['notFoundImage'=>'画像は見つかりませんでした。']);
     },
     'api'=>function(): HTTPRenderer{
         $ImageStatus = ValidationHelper::string($_GET['ImageStatus']??'');
@@ -73,7 +99,7 @@ return [
 
         return new JSONRenderer(['deleteImage'=>$deleteImage]);
     },
-    'api/notExistImage'=>function(): HTTPRenderer{
-        return new JSONRenderer(['notExistImage'=>'Not Exist Image']);
+    'api/notFoundImage'=>function(): HTTPRenderer{
+        return new JSONRenderer(['notFoundImage'=>'Not Exist Image']);
     }
 ];

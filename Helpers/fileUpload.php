@@ -29,14 +29,13 @@ if (isset($upload_file) && is_uploaded_file($upload_file['tmp_name'])) {
     $mime_type = finfo_file($finfo, $file_tmp_path);
 
     $user_ip = $_SERVER['REMOTE_ADDR'];
-    $date = ValidationHelper::string(date("Y-m-d H:i:s"));
-    $post_file_name = ValidationHelper::string(hash("md5",$date));
-    $post_url = "postImage/".$post_file_name;
-    $delete_url = "deleteImage/".ValidationHelper::string(hash("sha1",$date));
+    $date = date("Y-m-d H:i:s");
+    $post_file_name = hash("md5",$date);
+    $post_url = $mime_type."/".$post_file_name;
+    $delete_url = $mime_type."/".hash("sha1",$date);
     
-
-    $allowed_file_extensions = array('jpg', 'jpeg', 'png', 'gif');
-    $allowed_mime_type = array('image/jpeg', 'image/png', 'image/gif');
+    $allowed_file_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $allowed_mime_type = ['image/jpeg', 'image/png', 'image/gif'];
 
     // 画像ファイルとして有効かチェック
     if(getimagesize($file_tmp_path) === false){
@@ -64,14 +63,14 @@ if (isset($upload_file) && is_uploaded_file($upload_file['tmp_name'])) {
         // ファイルの処理を行う
         // 例：ファイルを特定のディレクトリに移動する
         // $upload_file_dir = '../Images/'.$file_extension.'/';
-        $dest_path = $upload_file_dir . "/" . $post_file_name . "." . $file_extension;
+        $image_path = $upload_file_dir . "/" . $post_file_name . "." . $file_extension;
         
-        if(move_uploaded_file($file_tmp_path, $dest_path)) {
+        if(move_uploaded_file($file_tmp_path, $image_path)) {
             $status = 'success';
             $message = 'ファイルは正しくアップロードされました。';
 
             // DBにデータを追加する
-            $command = sprintf("php ../console seed --title %s --access_control %s --file_extension %s --post_url %s --delete_url %s --ip_address  %s --file_size  %s",$input_title, $access_control, $file_extension, $post_url, $delete_url, $user_ip, $file_size);            
+            $command = sprintf("php ../console seed --title %s --access_control %s --image_path %s --post_url %s --delete_url %s --ip_address  %s --file_size  %s",$input_title, $access_control, "../".$image_path, $post_url, $delete_url, $user_ip, $file_size);
             exec($command, $output);
         } else {
             $status = 'failed';
@@ -101,6 +100,7 @@ function generateDir(){
         $dir_path .= '/' . $date;
         if(!file_exists($dir_path)){
             mkdir($dir_path, 0777);
+            chmod($dir_path, 0777);
         }
     }
     return $dir_path;
