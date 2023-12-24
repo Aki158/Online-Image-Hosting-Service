@@ -20,9 +20,7 @@ class Seed extends AbstractCommand
             (new Argument('post_url'))->description('Set post_url.')->required(false)->allowAsShort(true),
             (new Argument('delete_url'))->description('Set delete_url.')->required(false)->allowAsShort(true),
             (new Argument('ip_address'))->description('Set ip_address.')->required(false)->allowAsShort(true),
-            (new Argument('view_count'))->description('Set view_count.')->required(false)->allowAsShort(true),
             (new Argument('file_size'))->description('Set file_size.')->required(false)->allowAsShort(true),
-            (new Argument('accessed_at'))->description('Set accessed_at.')->required(false)->allowAsShort(true),
         ];
     }
 
@@ -34,15 +32,13 @@ class Seed extends AbstractCommand
         $post_url = $this->getArgumentValue('post_url');
         $delete_url = $this->getArgumentValue('delete_url');
         $ip_address = $this->getArgumentValue('ip_address');
-        $view_count = $this->getArgumentValue('view_count');
         $file_size = $this->getArgumentValue('file_size');
-        $accessed_at = $this->getArgumentValue('accessed_at');
 
-        $this->runAllSeeds($title, $access_control, $file_extension, $post_url, $delete_url, $ip_address, $view_count, $file_size, $accessed_at);
+        $this->runAllSeeds($title, $access_control, $file_extension, $post_url, $delete_url, $ip_address, $file_size);
         return 0;
     }
     
-    function runAllSeeds(string $title, string $access_control, string $file_extension, string $post_url, string $delete_url, string $ip_address, int $view_count, float $file_size, string $accessed_at): void {
+    function runAllSeeds(string $title, string $access_control, string $file_extension, string $post_url, string $delete_url, string $ip_address, float $file_size): void {
         $directoryPath = __DIR__ . '/../../Database/Seeds';
 
         // ディレクトリをスキャンしてすべてのファイルを取得する
@@ -58,7 +54,7 @@ class Seed extends AbstractCommand
 
                 if (class_exists($className) && is_subclass_of($className, Seeder::class)) {
                     $seeder = new $className(new MySQLWrapper());
-                    $seeder->seed($title, $access_control, $file_extension, $post_url, $delete_url, $ip_address, $view_count, $file_size, $accessed_at);
+                    $seeder->seed($title, $access_control, $file_extension, $post_url, $delete_url, $ip_address, $file_size);
                 }
                 else throw new \Exception('Seeder must be a class that subclasses the seeder interface');
             }

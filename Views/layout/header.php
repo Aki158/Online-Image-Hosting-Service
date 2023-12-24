@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="../Public/css/style.css">
 
     <title>Online Image Hosting Service</title>
-    <div class="fixed-header bg-info">
+    <div class="fixed-header bg-dark">
         <div class="container d-flex justify-content-between">
-            <h3 class="py-3">Online Image Hosting Service</h3>
+            <h3 class="py-3 text-light">Online Image Hosting Service</h3>
             <div class="d-sm-none d-md-flex">
-                <a href="../newImage" class="responsive-new-Image btn btn-primary m-3"><i class="fa-solid fa-plus"></i> New Image</a>
-                <a href="../newImage" class="responsive-plus btn btn-primary m-3"><i class="fa-solid fa-plus"></i></a>
-                <a href="../publicImages" class="responsive-public-Images btn btn-primary m-3"><i class="fa-solid fa-table"></i> Public Images</a>
-                <a href="../publicImages" class="responsive-table btn btn-primary m-3"><i class="fa-solid fa-table"></i> </a>
+                <a href="../newImage" class="responsive-new-Image btn btn-warning m-3"><i class="fa-solid fa-plus"></i> ポストする</a>
+                <a href="../newImage" class="responsive-plus btn btn-warning m-3"><i class="fa-solid fa-plus"></i></a>
+                <a href="../publicImages" class="responsive-public-Images btn btn-warning m-3"><i class="fa-solid fa-table"></i> リスト</a>
+                <a href="../publicImages" class="responsive-table btn btn-warning m-3"><i class="fa-solid fa-table"></i> </a>
             </div>
         </div>
     </div>

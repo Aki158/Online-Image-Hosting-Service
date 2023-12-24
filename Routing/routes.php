@@ -18,10 +18,9 @@ return [
         return new HTMLRenderer('newImage', ['ImageStatus'=>$ImageStatus]);
     },
     'publicImages'=>function(): HTTPRenderer{
-        DatabaseHelper::checkImagesExpiration();
-        $ImagesTable = DatabaseHelper::getImagesTableInfo();
+        $ImagesList = DatabaseHelper::getImagesListInfo();
 
-        return new HTMLRenderer('publicImages', ['ImagesTable'=>$ImagesTable]);
+        return new HTMLRenderer('publicImages', ['ImagesList'=>$ImagesList]);
     },
     'postImage'=>function(): HTTPRenderer{
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -54,9 +53,9 @@ return [
     },
     'api/publicImages'=>function(){
         DatabaseHelper::checkImagesExpiration();
-        $ImagesTable = DatabaseHelper::getImagesTableInfo();
+        $ImagesList = DatabaseHelper::getImagesListInfo();
 
-        return new JSONRenderer(['ImagesTable'=>$ImagesTable]);
+        return new JSONRenderer(['ImagesList'=>$ImagesList]);
     },
     'api/postImage'=>function(){
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
