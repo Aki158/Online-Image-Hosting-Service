@@ -13,7 +13,7 @@ $routes = include('Routing/routes.php');
 // リクエストURIを解析してパスだけを取得します。
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = ltrim($path, '/');
-$allowed_path = ['image/jpeg', 'image/png', 'image/gif'];
+$allowed_path = ['image-jpeg', 'image-png', 'image-gif'];
 $path = ValidationHelper::path($path, $allowed_path);
 
 // ルーティングにパスが存在するかチェックする
@@ -48,5 +48,5 @@ if (isset($routes[$path])) {
 } else {
     // マッチするルートがない場合、404エラーを表示します。
     http_response_code(404);
-    echo "404 Not Found: The requested route was not found on this server.";
+    print("404 Not Found: The requested route was not found on this server.");
 }

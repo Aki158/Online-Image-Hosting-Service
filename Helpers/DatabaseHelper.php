@@ -8,6 +8,23 @@ use Exception;
 
 class DatabaseHelper
 {
+    public static function deleteImage(string $image_path): string{
+        $db = new MySQLWrapper();
+        
+        if(!unlink($image_path)){
+            return "画像は見つかりませんでした...";
+        }
+
+        // Imageテーブルからデータを削除する
+        $stmt = $db->prepare("DELETE FROM Image WHERE image_path = ?");
+        $stmt->bind_param('s', $image_path);
+        
+        if(!$stmt->execute()){
+            return "テーブルから画像データを削除できませんでした...";
+        }
+        return "画像の削除に成功しました!";
+    }
+
     public static function updateImage(int $id): void{
         $db = new MySQLWrapper();
         $date = date("Y-m-d H:i:s");
@@ -15,7 +32,7 @@ class DatabaseHelper
         $stmt = $db->prepare("UPDATE Image SET accessed_at = ?, view_count = view_count + 1 WHERE id = ?");
         $stmt->bind_param('si', $date, $id);
         $stmt->execute();
-    }    
+    }
 
 
     public static function getImage(string $column_name,string $path): array{
