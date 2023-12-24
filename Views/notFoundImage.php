@@ -1,4 +1,5 @@
-<div class="container py-5">
-    <h4 class="text-center">Image does not exist.</h4>
+<div class="container py-4">
+    <h4>ページが見つかりません</h4></h4>
+    <p>削除されたか、入力したURLが間違っている可能性があります。</p>
 </div>
 

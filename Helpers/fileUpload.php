@@ -27,12 +27,13 @@ if (isset($upload_file) && is_uploaded_file($upload_file['tmp_name'])) {
 
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     $mime_type = finfo_file($finfo, $file_tmp_path);
+    $media_type = str_replace("/" , "-", $mime_type);
 
     $user_ip = $_SERVER['REMOTE_ADDR'];
     $date = date("Y-m-d H:i:s");
     $post_file_name = hash("md5",$date);
-    $post_url = $mime_type."/".$post_file_name;
-    $delete_url = $mime_type."/".hash("sha1",$date);
+    $post_url = $media_type."/".$post_file_name;
+    $delete_url = $media_type."/".hash("sha1",$date);
     
     $allowed_file_extensions = ['jpg', 'jpeg', 'png', 'gif'];
     $allowed_mime_type = ['image/jpeg', 'image/png', 'image/gif'];
@@ -70,7 +71,7 @@ if (isset($upload_file) && is_uploaded_file($upload_file['tmp_name'])) {
             $message = 'ファイルは正しくアップロードされました。';
 
             // DBにデータを追加する
-            $command = sprintf("php ../console seed --title %s --access_control %s --image_path %s --post_url %s --delete_url %s --ip_address  %s --file_size  %s",$input_title, $access_control, "../".$image_path, $post_url, $delete_url, $user_ip, $file_size);
+            $command = sprintf("php ../console seed --title %s --access_control %s --image_path %s --post_url %s --delete_url %s --ip_address  %s --file_size  %s",$input_title, $access_control, $image_path, $post_url, $delete_url, $user_ip, $file_size);
             exec($command, $output);
         } else {
             $status = 'failed';

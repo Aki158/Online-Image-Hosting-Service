@@ -40,10 +40,9 @@
             </div>
         </div>
         <div class="col-8">
-            <h5 class="my-1">プレビュー</h5>
+            <h5 class="my-1"><i class="fa-regular fa-image"></i> プレビュー</h5>
             <img id="uploadImg" src="" alt="ファイルを選択すると表示されます">
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
 <script src="../Public/js/app_newImage.js"></script>

@@ -17,7 +17,7 @@ return [
 
         return new HTMLRenderer('publicImages', ['ImagesList'=>$ImagesList]);
     },
-    'image/jpeg'=>function(): HTTPRenderer{
+    'image-jpeg'=>function(): HTTPRenderer{
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $path = ltrim($path, '/');
         $path = ValidationHelper::string($path);
@@ -30,7 +30,7 @@ return [
         }
         return new HTMLRenderer('deleteImage', ['image'=>$image]);
     },
-    'image/png'=>function(): HTTPRenderer{
+    'image-png'=>function(): HTTPRenderer{
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $path = ltrim($path, '/');
         $path = ValidationHelper::string($path);
@@ -43,7 +43,7 @@ return [
         }
         return new HTMLRenderer('deleteImage', ['image'=>$image]);
     },
-    'image/gif'=>function(): HTTPRenderer{
+    'image-gif'=>function(): HTTPRenderer{
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $path = ltrim($path, '/');
         $path = ValidationHelper::string($path);
@@ -56,14 +56,6 @@ return [
         }
         return new HTMLRenderer('deleteImage', ['image'=>$image]);
     },
-    // 'deleteImage'=>function(): HTTPRenderer{
-    //     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    //     $path = ltrim($path, '/');
-    //     $path = ValidationHelper::string($path);
-    //     $deleteImage = DatabaseHelper::getImage('delete_url', $path);
-
-    //     return new HTMLRenderer('deleteImage', ['deleteImage'=>$deleteImage]);
-    // },
     'notFoundImage'=>function(): HTTPRenderer{
         return new HTMLRenderer('notFoundImage', ['notFoundImage'=>'画像は見つかりませんでした。']);
     },
