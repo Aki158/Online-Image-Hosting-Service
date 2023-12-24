@@ -19,7 +19,7 @@ class ImageSeeder extends AbstractSeeder {
         ],
         [
             'data_type' => 'string',
-            'column_name' => 'file_extension'
+            'column_name' => 'image_path'
         ],
         [
             'data_type' => 'string',
@@ -39,13 +39,13 @@ class ImageSeeder extends AbstractSeeder {
         ]
     ];
 
-    public function createRowData(string $title, string $access_control, string $file_extension, string $post_url, string $delete_url, string $ip_address, float $file_size): array
+    public function createRowData(string $title, string $access_control, string $image_path, string $post_url, string $delete_url, string $ip_address, float $file_size): array
     {
         return [
             [
                 $title,
                 $access_control,
-                $file_extension,
+                $image_path,
                 $post_url,
                 $delete_url,
                 $ip_address,

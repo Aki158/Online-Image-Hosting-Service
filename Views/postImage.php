@@ -1,10 +1,15 @@
-<div class="container">
+<?php
+
+namespace Views;
+
+use Helpers\DatabaseHelper;
+
+?>
+
+<div class="container py-3">
+    <h3><?= htmlspecialchars($image["title"])?></h3>
+    <h5 class="my-2">閲覧数 : <?= htmlspecialchars($image["view_count"])?></h5>
     <div>
-        <p>Image Name</p>
-        <p>View counter : xx</p>
-        <div>
-            <img src="" alt="No image.">
-        </div>
-        <a href="" class="btn btn-primary m-3">Download</a>
+        <img src="<?= htmlspecialchars($image["image_path"])?>" alt="No image.">
     </div>
 </div>

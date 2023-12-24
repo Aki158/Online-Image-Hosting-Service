@@ -13,7 +13,7 @@ class Image implements SchemaMigration
                 id INT PRIMARY KEY AUTO_INCREMENT,
                 title VARCHAR(255) NOT NULL,
                 access_control VARCHAR(255) NOT NULL,
-                file_extension VARCHAR(255) NOT NULL,
+                image_path VARCHAR(255) NOT NULL,
                 post_url VARCHAR(255) NOT NULL,
                 delete_url VARCHAR(255) NOT NULL,
                 ip_address VARCHAR(255) NOT NULL,

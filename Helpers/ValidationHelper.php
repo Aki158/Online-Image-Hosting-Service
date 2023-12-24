@@ -21,32 +21,30 @@ class ValidationHelper
         return $value;
     }
 
-    public static function code($value): string
+    public static function path($path,$allowed_path): string
     {
-        $ImageStatus = '';
-
-        if(strlen($value) >= 65535){
-            $ImageStatus = "ExceedsBytes";
-        }
-        else if(strlen($value) == 0){
-            $ImageStatus = "EmptyImage";
-        }
-        else if(!(mb_check_encoding($value, 'UTF-8'))){
-            $ImageStatus = "non-UTF-8";
-        }
-
-        if($ImageStatus !== ''){
-            header("Location: ../newImage?ImageStatus=".$ImageStatus);
-            exit;
-        }
-        return $value;
-    }
-
-    public static function path($path,$prefix): string
-    {
-        if (substr($path, 0, strlen($prefix)) === $prefix) {
-            $path = $prefix;
+        foreach($allowed_path as $prefix){
+            if (substr($path, 0, strlen($prefix)) === $prefix) {
+                return $prefix;
+            }
         }
         return $path;
+    }
+
+    public static function urlType(string $path): string{
+        $split_path = explode("/", $path);
+        $end_path = end($split_path);
+        $end_path_len = strlen($end_path);
+
+        if($end_path_len === 32){
+            return "post_url";
+        }
+        else if($end_path_len === 40){
+            return "delete_url";
+        }
+        else{
+            header("Location: ../notFoundImage");
+            exit;
+        }
     }
 }

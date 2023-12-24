@@ -8,6 +8,42 @@ use Exception;
 
 class DatabaseHelper
 {
+    public static function updateImage(int $id): void{
+        $db = new MySQLWrapper();
+        $date = date("Y-m-d H:i:s");
+
+        $stmt = $db->prepare("UPDATE Image SET accessed_at = ?, view_count = view_count + 1 WHERE id = ?");
+        $stmt->bind_param('si', $date, $id);
+        $stmt->execute();
+    }    
+
+
+    public static function getImage(string $column_name,string $path): array{
+        $db = new MySQLWrapper();
+
+        if($column_name === "post_url"){
+            $stmt = $db->prepare("SELECT * FROM Image WHERE post_url = ?");
+        }
+        else if($column_name === "delete_url"){
+            $stmt = $db->prepare("SELECT * FROM Image WHERE delete_url = ?");
+        }
+        else{
+            throw new Exception('column_name contains an unexpected value.');
+        }
+        $stmt->bind_param('s', $path);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $image = $result->fetch_assoc();
+
+        // 画像が見つからない場合
+        if(!$image){
+            header("Location: ../notFoundImage");
+            exit;
+        }
+        return $image;
+    }
+
     public static function getImagesListInfo(): array{
         $db = new MySQLWrapper();
 
@@ -22,7 +58,7 @@ class DatabaseHelper
             $ImagesList[$i] = [
                 "title" => $row["title"],
                 "post_url" => $row["post_url"],
-                "file_extension" => $row["file_extension"],
+                "image_path" => $row["image_path"],
                 "view_count" => $row["view_count"]
             ];
             $i++;
@@ -32,7 +68,7 @@ class DatabaseHelper
             $ImagesList[0] = [
                 "title" => "",
                 "post_url" => "",
-                "file_extension" => "",
+                "image_path" => "",
                 "view_count" => 0
             ];
         }
@@ -54,7 +90,7 @@ class DatabaseHelper
 
     //     // スニペットはの有効期限が切れていたら削除し、「Expired Image」というメッセージを表示する
     //     if(self::isExpired($image["expiration"], $image["created_at"])){
-    //         header("Location: ../notExistImage");
+    //         header("Location: ../notFoundImage");
     //         exit;
     //     }
     //     return $image;
