@@ -23,8 +23,8 @@ abstract class AbstractSeeder implements Seeder {
         $this->conn = $conn;
     }
 
-    public function seed(string $title, string $access_control, string $file_extension, string $post_url, string $delete_url, string $ip_address, int $view_count, float $file_size, string $accessed_at): void {
-        $data = $this->createRowData($title, $access_control, $file_extension, $post_url, $delete_url, $ip_address, $view_count, $file_size, $accessed_at);
+    public function seed(string $title, string $access_control, string $file_extension, string $post_url, string $delete_url, string $ip_address, float $file_size): void {
+        $data = $this->createRowData($title, $access_control, $file_extension, $post_url, $delete_url, $ip_address, $file_size);
 
         if($this->tableName === null) throw new \Exception('Class requires a table name');
         if(empty($this->tableColumns)) throw new \Exception('Class requires a columns');

@@ -6,6 +6,10 @@ body {
     padding-top: 100px;
 }
 
+#url_display_area {
+    display: none;
+}
+
 .public-img-size {
     height: 250px;
     width: 300px;

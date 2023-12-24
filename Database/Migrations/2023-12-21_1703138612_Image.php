@@ -17,10 +17,10 @@ class Image implements SchemaMigration
                 post_url VARCHAR(255) NOT NULL,
                 delete_url VARCHAR(255) NOT NULL,
                 ip_address VARCHAR(255) NOT NULL,
-                view_count INT NOT NULL,
+                view_count INT NOT NULL DEFAULT 0,
                 file_size FLOAT NOT NULL,
                 created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                accessed_at DATETIME NOT NULL
+                accessed_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             )"
         ];
     }

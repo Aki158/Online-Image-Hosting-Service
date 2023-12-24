@@ -34,20 +34,12 @@ class ImageSeeder extends AbstractSeeder {
             'column_name' => 'ip_address'
         ],
         [
-            'data_type' => 'int',
-            'column_name' => 'view_count'
-        ],
-        [
             'data_type' => 'float',
             'column_name' => 'file_size'
-        ],
-        [
-            'data_type' => 'string',
-            'column_name' => 'accessed_at'
         ]
     ];
 
-    public function createRowData(string $title, string $access_control, string $file_extension, string $post_url, string $delete_url, string $ip_address, int $view_count, float $file_size, string $accessed_at): array
+    public function createRowData(string $title, string $access_control, string $file_extension, string $post_url, string $delete_url, string $ip_address, float $file_size): array
     {
         return [
             [
@@ -57,9 +49,7 @@ class ImageSeeder extends AbstractSeeder {
                 $post_url,
                 $delete_url,
                 $ip_address,
-                $view_count,
-                $file_size,
-                $accessed_at
+                $file_size
             ]
         ];
     }
