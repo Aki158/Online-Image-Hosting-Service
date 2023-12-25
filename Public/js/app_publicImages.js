@@ -11,23 +11,31 @@ function renderTableCell(index, ImagesList, imagesListBody){
     const title = document.createElement("p");
     const view_count = document.createElement("p");
 
-    div.setAttribute("id", "ImageList"+(index+1));
-    a.setAttribute("id", "a"+(index+1));
-    img.setAttribute("id", "img"+(index+1));
-    title.setAttribute("id", "title"+(index+1));
-    view_count.setAttribute("id", "view_count"+(index+1));
+    if(ImagesList[index].id === 0) {
+        div.classList.add("my-3");
+        title.innerHTML = "ポストされた画像はありません...";
+        div.append(title);
+        imagesListBody.append(div);
+    }
+    else{
+        div.setAttribute("id", "ImageList"+(index+1));
+        a.setAttribute("id", "a"+(index+1));
+        img.setAttribute("id", "img"+(index+1));
+        title.setAttribute("id", "title"+(index+1));
+        view_count.setAttribute("id", "view_count"+(index+1));
 
-    div.classList.add("col-3", "my-2");
-    img.classList.add("public-img-size");
-    
-    a.href = ImagesList[index].post_url;
-    img.src = ImagesList[index].image_path;
-    title.innerHTML = "<i class='fa-solid fa-file-signature'></i> " + ImagesList[index].title;
-    view_count.innerHTML = "<i class='fa-solid fa-fire'></i> 閲覧数 : " + ImagesList[index].view_count;
+        div.classList.add("col-3", "my-2");
+        img.classList.add("public-img-size");
+        
+        a.href = ImagesList[index].post_url;
+        img.src = ImagesList[index].image_path;
+        title.innerHTML = "<i class='fa-solid fa-file-signature'></i> " + ImagesList[index].title;
+        view_count.innerHTML = "<i class='fa-solid fa-fire'></i> 閲覧数 : " + ImagesList[index].view_count;
 
-    a.append(img);
-    div.append(a);
-    div.append(title);
-    div.append(view_count);
-    imagesListBody.append(div);
+        a.append(img);
+        div.append(a);
+        div.append(title);
+        div.append(view_count);
+        imagesListBody.append(div);
+    }
 }
