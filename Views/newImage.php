@@ -24,8 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="my-3" id="post_status1"></p>
-                <p class="my-3 text-danger" id="post_status2"></p>
+                <p class="my-3" id="post_status"></p>
                 <div id="url_display_area">
                     <h5 class="py-1"><i class="fa-solid fa-link"></i>URL</h5>
                     <div class="row">
