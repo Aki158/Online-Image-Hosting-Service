@@ -7,10 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Views\\' => array($baseDir . '/Views'),
-    'Temp\\' => array($baseDir . '/Temp'),
     'Routing\\' => array($baseDir . '/Routing'),
     'Response\\' => array($baseDir . '/Response'),
     'Public\\' => array($baseDir . '/Public'),
+    'Images\\' => array($baseDir . '/Images'),
     'Helpers\\' => array($baseDir . '/Helpers'),
     'Exceptions\\' => array($baseDir . '/Exceptions'),
     'Design\\' => array($baseDir . '/Design'),

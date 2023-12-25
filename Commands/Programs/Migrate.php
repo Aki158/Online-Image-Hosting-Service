@@ -14,7 +14,7 @@ class Migrate extends AbstractCommand
     {
         return [
             (new Argument('rollback'))->description('Roll backwards. An integer n may also be provided to rollback n times.')->required(false)->allowAsShort(true),
-            (new Argument('init'))->description("Create the migrations table if it doesn't exist.")->required(false)->allowAsShort(true),
+            (new Argument('init'))->description("Create the migrations table if it doesn't exist.")->required(false)->allowAsShort(true)
         ];
     }
 

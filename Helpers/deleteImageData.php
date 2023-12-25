@@ -8,7 +8,7 @@ require_once '../vendor/autoload.php';
 use Helpers\DatabaseHelper;
 
 $raw = file_get_contents('php://input');
-$image_path = json_decode($raw);
-$status = DatabaseHelper::deleteImage($image_path);
+$imagePath = json_decode($raw);
+$status = DatabaseHelper::deleteImage($imagePath);
 
 print($status);

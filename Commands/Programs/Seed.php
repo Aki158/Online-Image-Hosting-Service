@@ -20,7 +20,7 @@ class Seed extends AbstractCommand
             (new Argument('post_url'))->description('Set post_url.')->required(false)->allowAsShort(true),
             (new Argument('delete_url'))->description('Set delete_url.')->required(false)->allowAsShort(true),
             (new Argument('ip_address'))->description('Set ip_address.')->required(false)->allowAsShort(true),
-            (new Argument('file_size'))->description('Set file_size.')->required(false)->allowAsShort(true),
+            (new Argument('file_size'))->description('Set file_size.')->required(false)->allowAsShort(true)
         ];
     }
 

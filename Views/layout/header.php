@@ -1,3 +1,9 @@
+<?php
+
+namespace Views\layout;
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>

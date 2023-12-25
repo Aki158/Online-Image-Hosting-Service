@@ -11,12 +11,6 @@ input.addEventListener('change', function() {
     reader.readAsDataURL(input.files[0]);
 });
 
-function clearResult(){
-    postStatus.classList.remove("text-danger");
-    postStatus.innerHTML = "";
-    urlDisplayArea.style.display = "none";
-}
-
 function postData() {
     const inputTitle = document.getElementById('input_title').value;
     const uploadFile = document.getElementById('upload_file');
@@ -35,7 +29,7 @@ function postData() {
         if (xhr.status === 200) {
             try {
                 const response = JSON.parse(xhr.responseText);
-                renderpostResult(response);
+                renderPostResult(response);
             } catch (e) {
                 console.log('Error parsing JSON:', e, xhr.responseText);
             }
@@ -46,7 +40,7 @@ function postData() {
     xhr.send(formData);
 }
 
-function renderpostResult(response){
+function renderPostResult(response){
     if(response.status === "success"){
         const postURL = document.getElementById("post_url");
         const deleteURL = document.getElementById("delete_url");
@@ -54,12 +48,18 @@ function renderpostResult(response){
         postStatus.innerHTML = "↓URLの生成に成功しました!";
         postURL.href = response.post_url;
         deleteURL.href = response.delete_url;
-        postURL.textContent = "https://online-image-hosting-service.aki158-website.blog/"+response.post_url;
-        deleteURL.textContent = "https://online-image-hosting-service.aki158-website.blog/"+response.delete_url;
+        postURL.textContent = response.post_url;
+        deleteURL.textContent = response.delete_url;
         urlDisplayArea.style.display = "block";
     }
     else{
         postStatus.classList.add("text-danger");
         postStatus.innerHTML = response.message;
     }
+}
+
+function clearResult(){
+    postStatus.classList.remove("text-danger");
+    postStatus.innerHTML = "";
+    urlDisplayArea.style.display = "none";
 }

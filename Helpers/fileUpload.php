@@ -8,80 +8,78 @@ require_once '../vendor/autoload.php';
 use Helpers\ValidationHelper;
 use Helpers\DatabaseHelper;
 
-$input_title = ValidationHelper::string($_POST['text'] !== ''?$_POST['text']:'Untitled');
-$upload_file = $_FILES['file'];
-$access_control = ValidationHelper::string($_POST['button']??null);
+$inputTitle = ValidationHelper::string($_POST['text'] !== ''?$_POST['text']:'Untitled');
+$uploadFile = $_FILES['file'];
+$accessControl = ValidationHelper::string($_POST['button']??'Private');
 
 $status = '';
 $message = '';
-$post_url = '';
-$delete_url = '';
+$postUrl = '';
+$deleteUrl = '';
 
-if (isset($upload_file) && is_uploaded_file($upload_file['tmp_name'])) {
-    $file_tmp_path = $upload_file['tmp_name'];
-    $file_name = $upload_file['name'];
-    $file_size = $upload_file['size'];
-    $file_type = $upload_file['type'];
+if (isset($uploadFile) && is_uploaded_file($uploadFile['tmp_name'])) {
+    $fileTmpPath = $uploadFile['tmp_name'];
+    $fileName = $uploadFile['name'];
+    $fileSize = $uploadFile['size'];
+    $fileType = $uploadFile['type'];
     
-    $file_name_cmps = explode(".", $file_name);
-    $file_extension = strtolower(end($file_name_cmps));
+    $fileNameCmps = explode(".", $fileName);
+    $fileExtension = strtolower(end($fileNameCmps));
 
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mime_type = finfo_file($finfo, $file_tmp_path);
-    $media_type = str_replace("/" , "-", $mime_type);
+    $mediaType = str_replace("/" , "-", $fileType);
 
-    $user_ip = $_SERVER['REMOTE_ADDR'];
+    $userIp = $_SERVER['REMOTE_ADDR'];
     $date = date("Y-m-d H:i:s");
-    $post_file_name = hash("md5",$date);
-    $post_url = $media_type."/".$post_file_name;
-    $delete_url = $media_type."/".hash("sha1",$date);
+    $postFileName = hash("md5",$date);
+    $postUrl = $mediaType."/".$postFileName;
+    $deleteUrl = $mediaType."/".hash("sha1",$date);
     
-    $allowed_file_extensions = ['jpg', 'jpeg', 'png', 'gif'];
-    $allowed_mime_type = ['image/jpeg', 'image/png', 'image/gif'];
+    $allowedFileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $allowedMimeType = ['image/jpeg', 'image/png', 'image/gif'];
 
-    $file_count = DatabaseHelper::countNumberFile($user_ip, date("Y-m-d ")."%") + 1;
-    $total_file_size = DatabaseHelper::totalFileSize($user_ip, date("Y-m-d ")."%") + $file_size;
+    $fileCount = DatabaseHelper::countFile($userIp, date("Y-m-d ")."%") + 1;
+    $totalFileSize = DatabaseHelper::totalFileSize($userIp, date("Y-m-d ")."%") + $fileSize;
 
     // 1日にアップロードできるファイル数(最大:5ファイル)を超えないかチェック
-    if($file_count > 5){
+    if($fileCount > 5){
         $status = 'failed';
         $message = '1日にアップロードできるファイル数は、5ファイルまでです。';
     }
     // 1日にアップロードできるファイルサイズ(合計5MBまで)を超えないかチェック
-    else if($total_file_size > 5242880){
+    else if($totalFileSize > 5242880){
         $status = 'failed';
         $message = '1日にアップロードできるファイルサイズは、合計で5MBまでです。';
     }
     // 画像ファイルとして有効かチェック
-    else if(getimagesize($file_tmp_path) === false){
+    else if(getimagesize($fileTmpPath) === false){
         $status = 'failed';
         $message = 'アップロードされたファイルは、画像として認識できませんでした。<br>設定を見直してください。';
     }
     // 許可されているMIMEタイプかチェック
-    else if(!in_array($mime_type, $allowed_mime_type)){
+    else if(!in_array($fileType, $allowedMimeType)){
         $status = 'failed';
         $message = 'アップロードされたファイルの種類(MIMEタイプ)は、許可されていません。<br>設定を見直してください。';
     }
     // 許可されている拡張子かチェック
-    else if (!in_array($file_extension, $allowed_file_extensions)) {
+    else if (!in_array($fileExtension, $allowedFileExtensions)) {
         $status = 'failed';
         $message = 'アップロードされたファイルの拡張子は、許可されていません。<br>設定を見直してください。';
     }
     // ファイルサイズのチェック(上限2MB)
-    else if($file_size > 2097152){
+    else if($fileSize > 2097152){
         $status = 'failed';
         $message = 'アップロードできるファイルサイズ(最大:2MB)を超えています。<br>設定を見直してください。';
     }
     else{
         $upload_file_dir = generateDir();
-        $image_path = $upload_file_dir . "/" . $post_file_name . "." . $file_extension;
+        $image_path = $upload_file_dir . "/" . $postFileName . "." . $fileExtension;
         
-        if(move_uploaded_file($file_tmp_path, $image_path)) {
+        if(move_uploaded_file($fileTmpPath, $image_path)) {
             $status = 'success';
             $message = 'ファイルは正しくアップロードされました。';
 
             // DBにデータを追加する
-            $command = sprintf("php ../console seed --title %s --access_control %s --image_path %s --post_url %s --delete_url %s --ip_address  %s --file_size  %s",$input_title, $access_control, $image_path, $post_url, $delete_url, $user_ip, $file_size);
+            $command = sprintf("php ../console seed --title %s --access_control %s --image_path %s --post_url %s --delete_url %s --ip_address  %s --file_size  %s",$inputTitle, $accessControl, $image_path, $postUrl, $deleteUrl, $userIp, $fileSize);
             exec($command, $output);
         } else {
             $status = 'failed';
@@ -96,25 +94,23 @@ if (isset($upload_file) && is_uploaded_file($upload_file['tmp_name'])) {
 $response_data = array(
     'status' => $status,
     'message' => $message,
-    'post_url' => $post_url,
-    'delete_url' => $delete_url,
+    'post_url' => $postUrl,
+    'delete_url' => $deleteUrl
 );
 
 // app_newImage.jsにJSON形式でデータをレスポンスする
 print(json_encode($response_data));
 
 function generateDir(){
-    $dir_path = '..';
-    $dir_arr = ['Images', date('Y'), date('m'), date('d')];
+    $dirPath = '..';
+    $dirArr = ['Images', date('Y'), date('m'), date('d')];
 
-    foreach($dir_arr as $dir_name){
-        $dir_path .= '/' . $dir_name;
-        if(!file_exists($dir_path)){
-            mkdir($dir_path, 0777);
-            chmod($dir_path, 0777);
+    foreach($dirArr as $dir_name){
+        $dirPath .= '/' . $dir_name;
+        if(!file_exists($dirPath)){
+            mkdir($dirPath, 0777);
+            chmod($dirPath, 0777);
         }
     }
-    return $dir_path;
+    return $dirPath;
 }
-
-?>
