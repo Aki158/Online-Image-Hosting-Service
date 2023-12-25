@@ -6,10 +6,10 @@
             "Design\\": "Design/",
             "Exceptions\\": "Exceptions/",
             "Helpers\\": "Helpers/",
+            "Images\\": "Images/",
             "Public\\": "Public/",
             "Response\\": "Response/",
             "Routing\\": "Routing/",
-            "Temp\\": "Temp/",
             "Views\\": "Views/"
         }
     }

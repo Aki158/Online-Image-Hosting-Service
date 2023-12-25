@@ -13,7 +13,7 @@ class CodeGeneration extends AbstractCommand
     public static function getArguments(): array
     {
         return [
-            (new Argument('name'))->description('Name of the file that is to be generated.')->required(false),
+            (new Argument('name'))->description('Name of the file that is to be generated.')->required(false)
         ];
     }
 

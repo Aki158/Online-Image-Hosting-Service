@@ -17,13 +17,13 @@ class ValidationHelper
 
     public static function string($value): string
     {
-        if (!is_string($value)) throw new \InvalidArgumentException("The provided value is not a valid string.");
+        if (!is_string($value) || strlen($value) > 256) throw new \InvalidArgumentException("The provided value is not a valid string.");
         return $value;
     }
 
-    public static function path($path,$allowed_path): string
+    public static function path($path,$allowedPath): string
     {
-        foreach($allowed_path as $prefix){
+        foreach($allowedPath as $prefix){
             if (substr($path, 0, strlen($prefix)) === $prefix) {
                 return $prefix;
             }
@@ -32,14 +32,14 @@ class ValidationHelper
     }
 
     public static function urlType(string $path): string{
-        $split_path = explode("/", $path);
-        $end_path = end($split_path);
-        $end_path_len = strlen($end_path);
+        $splitPath = explode("/", $path);
+        $endPath = end($splitPath);
+        $endPathLen = strlen($endPath);
 
-        if($end_path_len === 32){
+        if($endPathLen === 32){
             return "post_url";
         }
-        else if($end_path_len === 40){
+        else if($endPathLen === 40){
             return "delete_url";
         }
         else{

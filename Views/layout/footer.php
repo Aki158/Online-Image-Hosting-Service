@@ -1,3 +1,9 @@
+<?php
+
+namespace Views\layout;
+
+?>
+
 </main>
 
 <footer class="bg-light text-center text-lg-start">

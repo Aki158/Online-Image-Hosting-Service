@@ -11,10 +11,6 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         array (
             'Views\\' => 6,
         ),
-        'T' => 
-        array (
-            'Temp\\' => 5,
-        ),
         'R' => 
         array (
             'Routing\\' => 8,
@@ -23,6 +19,10 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'P' => 
         array (
             'Public\\' => 7,
+        ),
+        'I' => 
+        array (
+            'Images\\' => 7,
         ),
         'H' => 
         array (
@@ -48,10 +48,6 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         array (
             0 => __DIR__ . '/../..' . '/Views',
         ),
-        'Temp\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Temp',
-        ),
         'Routing\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Routing',
@@ -63,6 +59,10 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
         'Public\\' => 
         array (
             0 => __DIR__ . '/../..' . '/Public',
+        ),
+        'Images\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Images',
         ),
         'Helpers\\' => 
         array (

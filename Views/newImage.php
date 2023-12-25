@@ -1,3 +1,9 @@
+<?php
+
+namespace Views;
+
+?>
+
 <div class="container pb-5">
     <div class="row">
         <div class="col-4">

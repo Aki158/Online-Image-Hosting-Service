@@ -1,16 +1,15 @@
-function click_delete(image_path){
+function clickDelete(imagePath){
     fetch("../../Helpers/deleteImageData.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(image_path)
+        body: JSON.stringify(imagePath)
     })
     .then(response => response.text())
     .then(data => {
-        console.log(data);
-        var res_message = document.getElementById("res_message");
-        res_message.innerHTML = data;
+        var resMessage = document.getElementById("res_message");
+        resMessage.innerHTML = data;
     })
     .catch(error => {
         console.error("Error:", error);
