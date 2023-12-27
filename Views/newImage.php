@@ -6,14 +6,14 @@ namespace Views;
 
 <div class="container pb-5">
     <div class="row">
-        <div class="col-4">
+        <div class="col-5">
             <div class="container mb-3">
                 <h5 class="py-1"><i class="fa-solid fa-gear"></i> 設定</h5>
                 <div class="row">
                     <div class="col-md-12 bg-light rounded custom-border">
                         <div class="my-3">
                             <p class="my-1">タイトル</p>
-                            <input id="input_title" type="text" name="name" size="20" maxlength="50">
+                            <input id="input_title" type="text" name="name" size="35" maxlength="50">
                         </div>
                         <div class="my-3">
                             <input type="file" id="upload_file" accept=".jpg, .jpeg, .png, .gif">
@@ -44,7 +44,7 @@ namespace Views;
                 </div>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-7">
             <h5 class="my-1"><i class="fa-regular fa-image"></i> プレビュー</h5>
             <img id="uploadImg" src="" alt="ファイルを選択すると表示されます">
         </div>

@@ -31,8 +31,10 @@ if (isset($uploadFile) && is_uploaded_file($uploadFile['tmp_name'])) {
     $userIp = $_SERVER['REMOTE_ADDR'];
     $date = date("Y-m-d H:i:s");
     $postFileName = hash("md5",$date);
-    $postUrl = $mediaType."/".$postFileName;
-    $deleteUrl = $mediaType."/".hash("sha1",$date);
+    $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $host = $_SERVER['HTTP_HOST'];
+    $postUrl = $protocol.$host."/".$mediaType."/".$postFileName;
+    $deleteUrl = $protocol.$host."/".$mediaType."/".hash("sha1",$date);
     
     $allowedFileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     $allowedMimeType = ['image/jpeg', 'image/png', 'image/gif'];
