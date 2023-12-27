@@ -16,7 +16,7 @@ return [
         return new HTMLRenderer('publicImages', ['imagesList'=>$imagesList]);
     },
     'image-jpeg'=>function(): HTTPRenderer{
-        $imageUrlType = getImageUrlTypeInfo($_SERVER['REQUEST_URI']);
+        $imageUrlType = getImageUrlTypeInfo();
 
         if($imageUrlType['urlType'] === "post_url"){
             return new HTMLRenderer('postImage', ['image'=>$imageUrlType['image']]);
@@ -24,7 +24,7 @@ return [
         return new HTMLRenderer('deleteImage', ['image'=>$imageUrlType['image']]);
     },
     'image-png'=>function(): HTTPRenderer{
-        $imageUrlType = getImageUrlTypeInfo($_SERVER['REQUEST_URI']);
+        $imageUrlType = getImageUrlTypeInfo();
 
         if($imageUrlType['urlType'] === "post_url"){
             return new HTMLRenderer('postImage', ['image'=>$imageUrlType['image']]);
@@ -32,7 +32,7 @@ return [
         return new HTMLRenderer('deleteImage', ['image'=>$imageUrlType['image']]);
     },
     'image-gif'=>function(): HTTPRenderer{
-        $imageUrlType = getImageUrlTypeInfo($_SERVER['REQUEST_URI']);
+        $imageUrlType = getImageUrlTypeInfo();
 
         if($imageUrlType['urlType'] === "post_url"){
             return new HTMLRenderer('postImage', ['image'=>$imageUrlType['image']]);
@@ -51,17 +51,17 @@ return [
         return new JSONRenderer(['imagesList'=>$imagesList]);
     },
     'api/image-jpeg'=>function(): HTTPRenderer{
-        $imageUrlType = getImageUrlTypeInfo($_SERVER['REQUEST_URI']);
+        $imageUrlType = getImageUrlTypeInfo();
 
         return new JSONRenderer(['image'=>$imageUrlType['image']]);
     },
     'api/image-png'=>function(): HTTPRenderer{
-        $imageUrlType = getImageUrlTypeInfo($_SERVER['REQUEST_URI']);
+        $imageUrlType = getImageUrlTypeInfo();
 
         return new JSONRenderer(['image'=>$imageUrlType['image']]);
     },
     'api/image-gif'=>function(): HTTPRenderer{
-        $imageUrlType = getImageUrlTypeInfo($_SERVER['REQUEST_URI']);
+        $imageUrlType = getImageUrlTypeInfo();
 
         return new JSONRenderer(['image'=>$imageUrlType['image']]);
     },
@@ -70,12 +70,14 @@ return [
     }
 ];
 
-function getImageUrlTypeInfo($requestUrl){
-    $path = parse_url($requestUrl, PHP_URL_PATH);
-    $path = ltrim($path, '/');
-    $path = ValidationHelper::string($path);
-    $urlType = ValidationHelper::urlType($path);
-    $image = DatabaseHelper::getImage($urlType, $path);
+function getImageUrlTypeInfo(){
+    $protocol= isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $host = $_SERVER['HTTP_HOST'];
+    $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $url = $protocol.$host.$uri;
+    $url = ValidationHelper::string($url);
+    $urlType = ValidationHelper::urlType($url);
+    $image = DatabaseHelper::getImage($urlType, $url);
 
     $imageUrlType = [
         "urlType" => $urlType,
