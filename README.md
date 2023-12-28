@@ -148,7 +148,7 @@ https://online-image-hosting-service.aki158-website.blog/
 ### ポストページ
 ![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/ceffec18-7066-4d04-b077-f6a76be788eb)
 
-### 設定
+#### 設定
 <table>
 <tr>
   <th colspan=2>機能</th>
@@ -202,20 +202,20 @@ https://online-image-hosting-service.aki158-website.blog/
   </td>
 </table>
 
-### プレビュー
+#### プレビュー
 
 | 機能 | 内容 |
 | ------- | ------- |
 | プレビュー | 設定の`参照...`ボタンで選択したファイルを表示します。<br>画像ではない場合は、表示できません。 |
 
-### URL
+#### URL
 
 | 機能 | 内容 |
 | ------- | ------- |
 | ポストURL | `ポストする`ボタンをクリックした後に表示されます。<br>URLをクリックすると、ポストURLページへ遷移します。 |
 | 削除URL | `ポストする`ボタンをクリックした後に表示されます。<br>URLをクリックすると、削除URLページへ遷移します。 |
 
-## リストページ
+### リストページ
 
 ![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/8525dd96-b019-4485-b79d-f1ee50c42cdf)
 
@@ -224,7 +224,7 @@ https://online-image-hosting-service.aki158-website.blog/
 | 一覧表示 | ポストされた画像の一覧が表示されます。<br>閲覧数が多い順に表示されます。<br>ポストページの表示設定をもとに一覧は生成されます。 |
 | ポストURLページへの遷移 | リストからユーザーが見たい画像をクリックして閲覧することができます。 |
 
-## ポストURLページ
+### ポストURLページ
 
 ![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/ca3ea13a-5229-4a0d-86a1-3f0f8e188ef8)
 
@@ -232,7 +232,7 @@ https://online-image-hosting-service.aki158-website.blog/
 | ------- | ------- |
 | 画像の表示 | ポストされた画像についての情報(タイトル/閲覧数/画像)が表示されます。<br>画像が削除されている場合は、URLの有効期限切れページへ遷移します。 |
 
-## 削除URLページ
+### 削除URLページ
 
 ![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/491bdee4-49c0-4c0c-b5e4-e222d868c498)
 
@@ -241,7 +241,7 @@ https://online-image-hosting-service.aki158-website.blog/
 | 画像の表示 | ポストされた画像についての情報(タイトル/画像)が表示されます。<br>画像が削除されている場合は、URLの有効期限切れページへ遷移します。 |
 | 画像を削除する | ボタンをクリックすると、画像とデータベースに登録されている画像のデータが削除されます。 |
 
-## URLの有効期限切れページ
+### URLの有効期限切れページ
 
 ![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/e7f7b2d1-49f3-4d20-ab83-0281f54ee2c4)
 
@@ -249,7 +249,7 @@ https://online-image-hosting-service.aki158-website.blog/
 | ------- | ------- |
 | 有効期限切れページの表示 | 削除された画像のURLにアクセスした場合は、このページに遷移します。 |
 
-## データ保持
+### データ保持
 
 | 機能 | 内容 |
 | ------- | ------- |
