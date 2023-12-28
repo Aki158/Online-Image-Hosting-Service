@@ -46,7 +46,7 @@ namespace Views;
         </div>
         <div class="col-7">
             <h5 class="my-1"><i class="fa-regular fa-image"></i> プレビュー</h5>
-            <img id="uploadImg" src="" alt="ファイルを選択すると表示されます">
+            <img id="uploadImg" class="preview-img-size" src="" alt="ファイルを選択すると表示されます">
         </div>
     </div>
 </div>

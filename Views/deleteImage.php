@@ -8,7 +8,7 @@ namespace Views;
     <div>
         <h4><i class='fa-solid fa-file-signature'></i> <?= htmlspecialchars($image["title"])?></h4>
         <div>
-            <img src="<?= htmlspecialchars($image["image_path"])?>" alt="画像は、表示できませんでした">
+            <img class="preview-img-size" src="<?= htmlspecialchars($image["image_path"])?>" alt="画像は、表示できませんでした">
         </div>
     </div>
     <div>

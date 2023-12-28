@@ -55,22 +55,22 @@ if (isset($uploadFile) && is_uploaded_file($uploadFile['tmp_name'])) {
     // 画像ファイルとして有効かチェック
     else if(getimagesize($fileTmpPath) === false){
         $status = 'failed';
-        $message = 'アップロードされたファイルは、画像として認識できませんでした。<br>設定を見直してください。';
+        $message = 'アップロードされたファイルは、画像として認識できませんでした。<br>選択したファイルは、アップロードできません。';
     }
     // 許可されているMIMEタイプかチェック
     else if(!in_array($fileType, $allowedMimeType)){
         $status = 'failed';
-        $message = 'アップロードされたファイルの種類(MIMEタイプ)は、許可されていません。<br>設定を見直してください。';
+        $message = 'アップロードされたファイルの種類(MIMEタイプ)は、許可されていません。<br>選択したファイルは、アップロードできません。';
     }
     // 許可されている拡張子かチェック
     else if (!in_array($fileExtension, $allowedFileExtensions)) {
         $status = 'failed';
-        $message = 'アップロードされたファイルの拡張子は、許可されていません。<br>設定を見直してください。';
+        $message = 'アップロードされたファイルの拡張子は、許可されていません。<br>選択したファイルは、アップロードできません。';
     }
     // ファイルサイズのチェック(上限2MB)
     else if($fileSize > 2097152){
         $status = 'failed';
-        $message = 'アップロードできるファイルサイズ(最大:2MB)を超えています。<br>設定を見直してください。';
+        $message = 'アップロードできるファイルサイズ(最大:2MB)を超えています。<br>選択したファイルは、アップロードできません。';
     }
     else{
         $upload_file_dir = generateDir();
@@ -85,12 +85,12 @@ if (isset($uploadFile) && is_uploaded_file($uploadFile['tmp_name'])) {
             exec($command, $output);
         } else {
             $status = 'failed';
-            $message = 'ファイルの移動中にエラーが発生しました。';
+            $message = 'ファイルの移動中にエラーが発生しました。<br>開発者に問い合わせてください。';
         }
     }
 } else {
     $status = 'failed';
-    $message = 'ファイルがアップロードされていないかエラーが発生しました。';
+    $message = 'ファイルがアップロードされていないかエラーが発生しました。<br>ファイルは、選択されているか確認してください。';
 }
 
 $response_data = array(

@@ -34,7 +34,8 @@ function postData() {
                 console.log('Error parsing JSON:', e, xhr.responseText);
             }
         } else {
-            postStatus.innerHTML = "エラーが発生しました。";
+            postStatus.classList.add("text-danger");
+            postStatus.innerHTML = "エラーが発生しました。<br>選択したファイルは、アップロードできません。";
         }
     };
     xhr.send(formData);
