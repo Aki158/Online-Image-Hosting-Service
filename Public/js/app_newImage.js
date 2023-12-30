@@ -35,7 +35,7 @@ function postData() {
             }
         } else {
             postStatus.classList.add("text-danger");
-            postStatus.innerHTML = "エラーが発生しました。<br>選択したファイルは、アップロードできません。";
+            postStatus.innerHTML = "エラーが発生しました。<br>3MB以上のメディアファイルは、アップロードできません。";
         }
     };
     xhr.send(formData);

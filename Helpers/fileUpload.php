@@ -42,35 +42,35 @@ if (isset($uploadFile) && is_uploaded_file($uploadFile['tmp_name'])) {
     $fileCount = DatabaseHelper::countFile($userIp, date("Y-m-d ")."%") + 1;
     $totalFileSize = DatabaseHelper::totalFileSize($userIp, date("Y-m-d ")."%") + $fileSize;
 
-    // 1日にアップロードできるファイル数(最大:5ファイル)を超えないかチェック
+    // 1日にアップロードできるファイル数(最大:5ファイル)を超えていないかチェック
     if($fileCount > 5){
         $status = 'failed';
-        $message = '1日にアップロードできるファイル数は、5ファイルまでです。';
+        $message = '1日にアップロードできるファイル数(5ファイルまで)を超えています。';
     }
-    // 1日にアップロードできるファイルサイズ(合計5MBまで)を超えないかチェック
+    // 1日にアップロードできるファイルサイズ(合計5MBまで)を超えていないかチェック
     else if($totalFileSize > 5242880){
         $status = 'failed';
-        $message = '1日にアップロードできるファイルサイズは、合計で5MBまでです。';
+        $message = '1日にアップロードできるファイルサイズ(合計5MBまで)を超えています。';
     }
     // 画像ファイルとして有効かチェック
     else if(getimagesize($fileTmpPath) === false){
         $status = 'failed';
-        $message = 'アップロードされたファイルは、画像として認識できませんでした。<br>選択したファイルは、アップロードできません。';
+        $message = 'アップロードされたファイルは、画像として認識できませんでした。<br>メディアファイルを選択してください。';
     }
     // 許可されているMIMEタイプかチェック
     else if(!in_array($fileType, $allowedMimeType)){
         $status = 'failed';
-        $message = 'アップロードされたファイルの種類(MIMEタイプ)は、許可されていません。<br>選択したファイルは、アップロードできません。';
+        $message = 'アップロードされたファイルの種類(MIMEタイプ)は、許可されていません。<br>許可されているMIMEタイプは、下記になります。<br>・image/jpeg<br>・image/png<br>・image/gif';
     }
     // 許可されている拡張子かチェック
     else if (!in_array($fileExtension, $allowedFileExtensions)) {
         $status = 'failed';
-        $message = 'アップロードされたファイルの拡張子は、許可されていません。<br>選択したファイルは、アップロードできません。';
+        $message = 'アップロードされたファイルの拡張子は、許可されていません。<br>許可されている拡張子は、下記になります。<br>・jpg<br>・jpeg<br>・png<br>・gif';
     }
-    // ファイルサイズのチェック(上限2MB)
-    else if($fileSize > 2097152){
+    // 1度にアップロードできるファイルサイズ(最大3MBまで)を超えていないかチェック
+    else if($fileSize > 3145728){
         $status = 'failed';
-        $message = 'アップロードできるファイルサイズ(最大:2MB)を超えています。<br>選択したファイルは、アップロードできません。';
+        $message = 'アップロードできるファイルサイズ(最大:3MB)を超えています。';
     }
     else{
         $upload_file_dir = generateDir();
