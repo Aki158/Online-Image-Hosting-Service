@@ -390,4 +390,6 @@ Amazon EC2 Auto Scaling は、アプリケーションの負荷を処理する�
 - [【Ubuntu】cron（crontab）でプログラムを定期的に実行：ジョブスケジューリング](https://office54.net/iot/linux/ubuntu-cron-crontab)
 - [サーバーのphp.iniによるアップロードファイルの最大容量の確認と容量制限の変更](https://www.php-factory.net/trivia/05.php)
 - [【php】ファイルアップロード時のエラーコードとエラーメッセージ](https://www.softel.co.jp/blogs/tech/archives/1824)
+- [ファイルサイズ変更のLinuxコマンド](https://qiita.com/yamada_yoshiki/items/b7cea46daa7b72ceb898)
+
 
