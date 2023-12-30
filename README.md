@@ -44,7 +44,7 @@ https://online-image-hosting-service.aki158-website.blog/
 | ------- | ------- |
 | アップロードできるファイルの拡張子 | `*.gif`<br>`*.png`<br>`*.jpeg` |
 | 1度にアップロードできるファイル数 | 1ファイル |
-| 1度にアップロードできるファイルの最大サイズ | 2MB |
+| 1度にアップロードできるファイルの最大サイズ | 1MB |
 | 1日にアップロードできるファイル数 | 5枚まで |
 | 1日にアップロードできるファイルの合計サイズ | 5MBまで |
 
@@ -148,7 +148,7 @@ https://online-image-hosting-service.aki158-website.blog/
 ### ポストページ
 ![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/ceffec18-7066-4d04-b077-f6a76be788eb)
 
-### 設定
+#### 設定
 <table>
 <tr>
   <th colspan=2>機能</th>
@@ -202,13 +202,13 @@ https://online-image-hosting-service.aki158-website.blog/
   </td>
 </table>
 
-### プレビュー
+#### プレビュー
 
 | 機能 | 内容 |
 | ------- | ------- |
 | プレビュー | 設定の`参照...`ボタンで選択したファイルを表示します。<br>画像ではない場合は、表示できません。 |
 
-### URL
+#### URL
 
 | 機能 | 内容 |
 | ------- | ------- |
@@ -217,6 +217,8 @@ https://online-image-hosting-service.aki158-website.blog/
 
 ### リストページ
 
+![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/8525dd96-b019-4485-b79d-f1ee50c42cdf)
+
 | 機能 | 内容 |
 | ------- | ------- |
 | 一覧表示 | ポストされた画像の一覧が表示されます。<br>閲覧数が多い順に表示されます。<br>ポストページの表示設定をもとに一覧は生成されます。 |
@@ -224,11 +226,15 @@ https://online-image-hosting-service.aki158-website.blog/
 
 ### ポストURLページ
 
+![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/ca3ea13a-5229-4a0d-86a1-3f0f8e188ef8)
+
 | 機能 | 内容 |
 | ------- | ------- |
 | 画像の表示 | ポストされた画像についての情報(タイトル/閲覧数/画像)が表示されます。<br>画像が削除されている場合は、URLの有効期限切れページへ遷移します。 |
 
 ### 削除URLページ
+
+![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/491bdee4-49c0-4c0c-b5e4-e222d868c498)
 
 | 機能 | 内容 |
 | ------- | ------- |
@@ -236,6 +242,8 @@ https://online-image-hosting-service.aki158-website.blog/
 | 画像を削除する | ボタンをクリックすると、画像とデータベースに登録されている画像のデータが削除されます。 |
 
 ### URLの有効期限切れページ
+
+![image](https://github.com/Aki158/Online-Image-Hosting-Service/assets/119317071/e7f7b2d1-49f3-4d20-ab83-0281f54ee2c4)
 
 | 機能 | 内容 |
 | ------- | ------- |
@@ -339,12 +347,12 @@ Amazon EC2 Auto Scaling は、アプリケーションの負荷を処理する�
 
 - アップロード時に、フロントエンド(JavaScript)とバックエンド(PHP)間でAjaxによる通信ができるか
 - ファイルは、アップロードされているか
-- 1日にアップロードできるファイル数(最大5ファイル)を超えないか
-- 1日にアップロードできるファイルサイズ(合計5MBまで)を超えないか
+- 1日にアップロードできるファイル数(最大5ファイル)を超えていないか
+- 1日にアップロードできるファイルサイズ(合計5MBまで)を超えていないか
 - 画像ファイルとして有効か
 - 許可されているMIMEタイプか
 - 許可されている拡張子か
-- 1日にアップロードできるファイルサイズ(最大2MB)を超えていないか
+- 1度にアップロードできるファイルサイズ(最大1MB)を超えていないか
 - ファイルをImagesフォルダに移動できるか
 
 ### その他
