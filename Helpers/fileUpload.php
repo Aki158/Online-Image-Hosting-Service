@@ -31,10 +31,11 @@ if (isset($uploadFile) && is_uploaded_file($uploadFile['tmp_name'])) {
     $userIp = $_SERVER['REMOTE_ADDR'];
     $date = date("Y-m-d H:i:s");
     $postFileName = hash("md5",$date);
+    $deleteFileName = hash("sha1",$date);
     $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? 'https://' : 'http://';
     $host = $_SERVER['HTTP_HOST'];
     $postUrl = $protocol.$host."/".$mediaType."/".$postFileName;
-    $deleteUrl = $protocol.$host."/".$mediaType."/".hash("sha1",$date);
+    $deleteUrl = $protocol.$host."/".$mediaType."/".$deleteFileName;
     
     $allowedFileExtensions = ['jpg', 'jpeg', 'png', 'gif'];
     $allowedMimeType = ['image/jpeg', 'image/png', 'image/gif'];
@@ -73,7 +74,7 @@ if (isset($uploadFile) && is_uploaded_file($uploadFile['tmp_name'])) {
         $message = 'アップロードできるファイルサイズ(最大:3MB)を超えています。';
     }
     else{
-        $upload_file_dir = generateDir();
+        $upload_file_dir = DatabaseHelper::generateDir("..", date('Y'), date('m'), date('d'));
         $image_path = $upload_file_dir . "/" . $postFileName . "." . $fileExtension;
         
         if(move_uploaded_file($fileTmpPath, $image_path)) {
@@ -103,16 +104,4 @@ $response_data = array(
 // app_newImage.jsにJSON形式でデータをレスポンスする
 print(json_encode($response_data));
 
-function generateDir(){
-    $dirPath = '..';
-    $dirArr = ['Images', date('Y'), date('m'), date('d')];
 
-    foreach($dirArr as $dir_name){
-        $dirPath .= '/' . $dir_name;
-        if(!file_exists($dirPath)){
-            mkdir($dirPath, 0777);
-            chmod($dirPath, 0777);
-        }
-    }
-    return $dirPath;
-}
