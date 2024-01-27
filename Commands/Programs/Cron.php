@@ -29,16 +29,27 @@ class Cron extends AbstractCommand
         $stmt1->execute();
 
         $result = $stmt1->get_result();
-        $currDate = new DateTime(date("Y-m-d H:i:s"));
+        $date = date("Y-m-d H:i:s");
+        $currDate = new DateTime($date);
         $i = 0;
         $imagesId = [];
+        $this->log("Execution time of cron command : ".$date."\n");
 
         while ($row = $result->fetch_assoc()) {
             $accessedAt = new DateTime($row["accessed_at"]);
             $interval = $currDate->diff($accessedAt);
             if((int)$interval->format("%a") >= 30){
                 // 30日間アクセスされていない画像を削除する
-                unlink(substr($row["image_path"], 3));
+                $deleteFilePath = substr($row["image_path"], 3);
+                // 画像ファイルの所有者をwww-dataからubuntu(管理者)に変更する
+                chown($deleteFilePath, "ubuntu");
+                $this->log("image_path : ".$row["image_path"]."\n");
+                if(unlink($deleteFilePath)){
+                    $this->log("File successfully deleted.\n");
+                }
+                else{
+                    $this->log("Failed to delete file.\n");
+                }
                 $imagesId[$i] = $row["id"];
                 $i++;
             }
@@ -58,7 +69,12 @@ class Cron extends AbstractCommand
             }
             call_user_func_array(array($stmt2, 'bind_param'), $params);
             // 30日間アクセスされていないデータを削除する
-            $stmt2->execute();
+            if($stmt2->execute()){
+                $this->log("Data successfully deleted.\n");
+            }
+            else{
+                $this->log("Failed to delete data.\n");
+            }
         }
     }
 }
