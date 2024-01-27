@@ -16,4 +16,4 @@ namespace Views;
     </div>
     <p id="res_message"></p>
 </div>
-<script src="../../Public/js/app_deleteImage.js"></script>
+<script src="/Public/js/app_deleteImage.js"></script>

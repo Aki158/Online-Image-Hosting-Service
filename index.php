@@ -16,6 +16,11 @@ $path = ltrim($path, '/');
 $allowed_path = ['image-jpeg', 'image-png', 'image-gif'];
 $path = ValidationHelper::path($path, $allowed_path);
 
+if($path === ""){
+    header("Location: /newImage");
+    exit();
+}
+
 // ルーティングにパスが存在するかチェックする
 if (isset($routes[$path])) {
     // コールバックを呼び出してrendererを作成します。

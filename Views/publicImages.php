@@ -13,4 +13,4 @@ namespace Views;
 <script>
     const imagesList = <?php echo json_encode($imagesList); ?>;
 </script>
-<script src="../Public/js/app_publicImages.js"></script>
+<script src="/Public/js/app_publicImages.js"></script>

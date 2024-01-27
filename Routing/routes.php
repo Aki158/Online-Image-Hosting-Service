@@ -7,7 +7,7 @@ use Response\Render\HTMLRenderer;
 use Response\Render\JSONRenderer;
 
 return [
-    ''=>function(): HTTPRenderer{
+    'newImage'=>function(): HTTPRenderer{
         return new HTMLRenderer('newImage', [''=>'']);
     },
     'publicImages'=>function(): HTTPRenderer{

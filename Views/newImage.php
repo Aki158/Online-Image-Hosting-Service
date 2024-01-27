@@ -50,4 +50,4 @@ namespace Views;
         </div>
     </div>
 </div>
-<script src="../Public/js/app_newImage.js"></script>
+<script src="/Public/js/app_newImage.js"></script>
